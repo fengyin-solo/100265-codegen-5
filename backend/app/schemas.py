@@ -256,6 +256,44 @@ class EmergencyplanEntry(BaseModel):
     field_6: str | None = None  # 演练日期
     field_7: str | None = None  # 预案状态
 
+class NoisecomplaintBatchItem(BaseModel):
+    """批量提交里单条投诉的填报内容：降噪措施逐条填、核实结论逐条定。"""
+
+    id: int
+    measure: str | None = None  # 降噪措施
+    conclusion: str | None = None  # 核实结论：有效 / 无效
+
+
+class NoisecomplaintBatchPayload(BaseModel):
+    """一次批量转办提交：转办部门整批统一记，记录逐条核验。"""
+
+    department: str = ""  # 转办部门，整批统一
+    items: list[NoisecomplaintBatchItem] = Field(default_factory=list)
+
+
+class NoisecomplaintBatchResult(BaseModel):
+    """批量提交结果：转办、无效、未提交三组分开返回，已转办的不回滚。"""
+
+    ok: bool
+    message: str
+    batch_no: str | None = None
+    transferred: list[dict[str, Any]] = Field(default_factory=list)
+    invalidated: list[dict[str, Any]] = Field(default_factory=list)
+    failed: list[dict[str, Any]] = Field(default_factory=list)
+
+
+class NoisecomplaintEntry(BaseModel):
+    """噪声投诉明细结构。"""
+
+    field_0: str | None = None  # 投诉编号
+    field_1: str | None = None  # 投诉点位
+    field_2: str | None = None  # 投诉时间
+    field_3: str | None = None  # 投诉人
+    field_4: str | None = None  # 噪声源
+    field_5: str | None = None  # 投诉内容
+    field_6: str | None = None  # 降噪措施
+    field_7: str | None = None  # 投诉状态
+
 class QualitycheckEntry(BaseModel):
     """监察记录明细结构。"""
 
