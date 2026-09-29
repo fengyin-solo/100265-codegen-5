@@ -267,3 +267,15 @@ class QualitycheckEntry(BaseModel):
     field_5: str | None = None  # 整改要求
     field_6: str | None = None  # 整改期限
     field_7: str | None = None  # 监察状态
+
+class NoisecomplaintEntry(BaseModel):
+    """噪声投诉明细结构。"""
+
+    field_0: str | None = None  # 投诉编号
+    field_1: str | None = None  # 投诉点位
+    field_2: str | None = None  # 投诉人
+    field_3: str | None = None  # 联系电话
+    field_4: str | None = None  # 投诉时间
+    field_5: str | None = None  # 投诉内容
+    field_6: str | None = None  # 降噪措施
+    field_7: str | None = None  # 转办部门
